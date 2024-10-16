@@ -3,7 +3,6 @@
 static void	__init_zero(t_prog *prog)
 {
 	prog->fd = -1;
-	prog->file = 0;
 	prog->read = 0;
 	prog->map = 0;
 	prog->size_x = 0;
@@ -15,30 +14,30 @@ static void	__init_zero(t_prog *prog)
 	prog->img.bits_per_pixel = 0;
 	prog->img.line_length = 0;
 	prog->img.endian = 0;
-	txtr->fill = 0;
-	txtr->exit = 0;
-	txtr->item = 0;
-	txtr->empty = 0;
-	txtr->player = 0;
+	prog->txtr.fill = 0;
+	prog->txtr.exit = 0;
+	prog->txtr.item = 0;
+	prog->txtr.empty = 0;
+	prog->txtr.player = 0;
 }
 
-static int	__init_image(t_txtr *txtr)
+static int	__init_textures(t_txtr *txtr)
 {
-	txtr->fill = ft_strdup("");
+	txtr->fill = ft_strdup("./assets/wall_model.xpm");
 	if (!txtr->fill)
-		return (1);
-	txtr->exit = ft_strdup("");
+		return (handle_things(3));
+	txtr->exit = ft_strdup("./assets/openExit_model.xmp");
 	if (!txtr->exit)
-		return (1);
-	txtr->item = ft_strdup("");
+		return (handle_things(3));
+	txtr->item = ft_strdup("./assets/coin_model.xpm");
 	if (!txtr->item)
-		return (1);
-	txtr->empty = ft_strdup("");
+		return (handle_things(3));
+	txtr->empty = ft_strdup("./assets/bg_model.xmp");
 	if (!txtr->empty)
-		return (1);
-	txtr->player = ft_strdup("");
+		return (handle_things(3));
+	txtr->player = ft_strdup("./assets/player_model.xmp");
 	if (!txtr->player)
-		return (1);
+		return (handle_things(3));
 	return (0);
 }
 
@@ -53,12 +52,36 @@ static int	__init_mlx(t_mlx *mlx)
 	return (0);
 }
 
+static int	check_map_valid(t_prog *prog)
+{
+	int		found;
+	char	**cpy;
+
+	if (map_valid_pei(prog->read))
+		return (1);
+	prog->map = fast_split(prog->read);
+	if (!prog->map)
+		return (handle_things(4));
+	if (map_valid_height_width(prog))
+		return (1);
+	if (map_valid_walls_rect(prog->map, prog->size_x, prog->size_y))
+		return (1);
+	cpy = cpy_map(prog->map, prog->size_y);
+	if (!cpy)
+		return (handle_things(3));
+	get_player_pos(prog);
+	found = 0;
+	map_valid_path(cpy, prog->player.x, prog->player.y, &found);
+	if (!found)
+		return (handle_ws("Could not find a valid path"));
+	return (0);
+}
+
 int	__init_struct(t_prog *prog, char *file)
 {
 	__init_zero(prog);
 	if (get_ext_name(file))
 		return (handle_things(1));
-	prog->file = file;
 	prog->fd = open(file, O_RDONLY);
 	if (prog->fd == -1)
 		return (handle_things(2));
@@ -66,16 +89,11 @@ int	__init_struct(t_prog *prog, char *file)
 	close(prog->fd);
 	if (!prog->read || !prog->read[0])
 		return (handle_things(3));
-	if (map_valid_pei(prog->read))
+	if (check_map_valid(prog))
 		return (1);
-	prog->map = fast_split(prog->read);
-	if (!prog->map)
-		return (handle_things(4));
+	if (__init_textures(&(prog->txtr)))
+		return (1);
 	if (__init_mlx(&(prog->mlx)))
-		return (1);
-	if (map_valid_height_width(prog))
-		return (1);
-	if (map_valid_walls_rect(prog->map, prog->size_x, prog->size_y))
 		return (1);
 	return (0);
 }

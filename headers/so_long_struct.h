@@ -10,6 +10,7 @@
 # define EXIT 'E'
 # define WALL '1'
 # define EMPTY '0'
+# define CHECK_FF 'F'
 
 typedef struct	s_data {
 	void	*img;
@@ -18,6 +19,12 @@ typedef struct	s_data {
 	int		line_length;
 	int		endian;
 }	t_data;
+
+typedef struct s_player
+{
+	int	x;
+	int	y;
+}	t_play;
 
 typedef struct	s_mlx
 {
@@ -37,13 +44,14 @@ typedef struct	s_texture
 typedef struct	s_prog
 {
 	int		fd;
-	char	*file;
 	char	*read;
 	char	**map;
 	int		size_x;
 	int		size_y;
 	t_mlx	mlx;
+	t_txtr	txtr;
 	t_data	img;
+	t_play	player;
 }	t_prog;
 
 #endif

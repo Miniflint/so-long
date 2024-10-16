@@ -95,3 +95,39 @@ int map_valid_height_width(t_prog *prog)
 	prog->size_x = size_x;
 	return (0);
 }
+
+void	print_map(char **map)
+{
+	int	i;
+
+	i = 0;
+	while (map[i])
+	{
+		ft_putstr(map[i]);
+		ft_putstr("\n");
+		i++;
+	}
+	ft_putstr("\n");
+}
+
+void	map_valid_path(char **map, int curr_x, int curr_y, int *found)
+{
+	if (curr_x < 0 || curr_y < 0 || !map || !map[curr_y] || !map[curr_y][curr_x])
+		return ;
+	if (map[curr_y][curr_x] == CHECK_FF || map[curr_y][curr_x] == WALL)
+		return ;
+	if (map[curr_y][curr_x] == EXIT)
+		*found = 1;
+	if (*found)
+		return ;
+	map[curr_y][curr_x] = CHECK_FF;
+	if (map[curr_y][curr_x + 1])
+		map_valid_path(map, curr_x + 1, curr_y, found);
+	if (map[curr_y][curr_x - 1])
+		map_valid_path(map, curr_x - 1, curr_y, found);
+	if (map[curr_y + 1][curr_x])
+		map_valid_path(map, curr_x, curr_y + 1, found);
+	if (map[curr_y - 1][curr_x])
+		map_valid_path(map, curr_x, curr_y - 1, found);
+	return ;
+}
