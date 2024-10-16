@@ -15,7 +15,7 @@ endif
 NAME	= so_long
 CC		= gcc $(CFLAGS)
 
-all: $(NAME) $(MLIB)
+all: $(NAME)
 
 minilibmake:
 	@echo "Compiling minilib..."
@@ -36,6 +36,7 @@ ${ODIR}/%.o: %.c
 
 clean:
 	@echo "Deleting objects"
+	@make -sC $(MLXDIR)
 	@rm -f $(OBJS)
 
 fclean: clean
