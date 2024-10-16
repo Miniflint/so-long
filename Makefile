@@ -1,23 +1,11 @@
-GREEN = \033[0;32m
-RED = \033[0;31m
-YELLOW = \033[0;33m
-
-SDIR	= ./src
-MDIR	= $(SDIR)/main
-UDIR	= $(SDIR)/utils
-MUDIR	= $(MDIR)/utils_mlx
+ODIR	= ./obj
 MLXDIR	= minilib
 
-MSRCS	= main.c __init__.c handle_movement.c map_checker.c change_image.c regen_map.c
-USRCS	= ft_strlen.c handle_error.c ft_strdup.c free_mem.c ft_strjoin.c ft_strlcat.c \
-			ft_strlcpy.c parse_map.c ft_itoa.c ft_strchr.c random_utils.c
-MUSRC	= close_win.c key_event.c
+HSRC	= headers
+MSRCS	= main.c utils.c handle_error.c __init_struct.c malloc_utils.c read_utils.c map_valid.c
 
-OSSRCS	= $(addprefix $(MDIR)/,$(MSRCS))
-OUSRCS	= $(addprefix $(UDIR)/,$(USRCS))
-MUSRCS	= $(addprefix $(MUDIR)/,$(MUSRC))
-FILES	= $(OSSRCS) $(OUSRCS) $(MUSRCS)
-OBJS	= $(FILES:.c=.o)
+FILES	= $(MSRCS)
+OBJS	= $(FILES:%.c=${ODIR}/%.o)
 MLIB	= $(MLXDIR)/libmlx.a
 CFLAGS	= -Wall -Werror -Wextra 
 
@@ -30,26 +18,26 @@ CC		= gcc $(CFLAGS)
 all: $(NAME)
 
 minilibmake:
-	@echo "$(GREEN)\n\nCompiling minilib..."
-	@make -C $(MLXDIR)
-	@echo "$(GREEN)Done"
+	@echo "Compiling minilib..."
+	@make -s -C $(MLXDIR)
+	@echo "Done"
 
-$(NAME): $(OBJS) minilibmake
-	@echo "$(GREEN)\n\nCompiling so_long..."
-	@$(CC) -I$(MLXDIR) -L$(MLXDIR) -lmlx -framework OpenGL -framework AppKit $(OBJS) -o $(NAME) $(MLIB)
-	@echo "$(GREEN)Done"
+$(NAME): minilibmake $(OBJS)
+	@echo "\nCompiling so_long"
+	@$(CC) -I$(HSRC) -I$(MLXDIR) -L$(MLXDIR) -lmlx -framework OpenGL -framework AppKit $(OBJS) -o $(NAME) $(MLIB)
+	@echo "Done"
 
-%.o: %.c
-	@echo "$(YELLOW)Generating so_long objects..." $@
-	$(CC) -Imlx -c $< -o $@
+${ODIR}/%.o: %.c
+	@mkdir -p $(ODIR)
+	@printf "Generating %s                  \r" $<
+	@$(CC) -Imlx -I$(MLXDIR) -I$(HSRC) -c $< -o $@
 
 clean:
-	@echo "$(RED)\nDeleting objects..."
-	@make -C $(MLXDIR) clean
+	@echo "Deleting objects"
 	@rm -f $(OBJS)
 
 fclean: clean
-	@echo "$(RED)\nDeleting executable..."
+	@echo "Deleting executable"
 	@rm -f $(NAME)
 
 re: fclean all 
