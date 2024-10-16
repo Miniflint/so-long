@@ -15,16 +15,18 @@ endif
 NAME	= so_long
 CC		= gcc $(CFLAGS)
 
-all: $(NAME)
+all: $(NAME) $(MLIB)
 
 minilibmake:
 	@echo "Compiling minilib..."
-	@make -s -C $(MLXDIR)
+	@make -sC $(MLXDIR)
 	@echo "Done"
 
-$(NAME): minilibmake $(OBJS)
+$(MLIB): minilibmake
+
+$(NAME): $(OBJS) $(MLIB)
 	@echo "\nCompiling so_long"
-	@$(CC) -I$(HSRC) -I$(MLXDIR) -L$(MLXDIR) -lmlx -framework OpenGL -framework AppKit $(OBJS) -o $(NAME) $(MLIB)
+	@$(CC) -L$(MLXDIR) -lmlx -framework OpenGL -framework AppKit $(OBJS) -o $(NAME) $(MLIB)
 	@echo "Done"
 
 ${ODIR}/%.o: %.c
@@ -42,4 +44,4 @@ fclean: clean
 
 re: fclean all 
 
-.PHONY:	clean fclean all re minilibmake
+.PHONY:	all clean fclean re
