@@ -27,8 +27,8 @@ int main(int argc, char **argv)
 		return (handle_nea(argv[0]));
 	if (__init_struct(&prog, argv[1]))
 		return (free_all(&prog));
-	while (1)
-		mlx_loop(prog.mlx.ptr);
+//	while (1)
+//		mlx_loop(prog.mlx.ptr);
 	free_all(&prog);
 	return (0);
 }

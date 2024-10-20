@@ -55,7 +55,7 @@ int	get_len_backslash(char *str)
 			nb++;
 		str++;
 	}
-	return (nb);
+	return (nb + 1);
 }
 
 char	**fast_split(char *str)

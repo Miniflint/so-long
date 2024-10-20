@@ -10,7 +10,7 @@ int	get_ext_name(char *filename)
 	if (i <= 4)
 		return (1);
 	i -= 4;
-	if (filename[i++] != '.')
+if (filename[i++] != '.')
 		return (1);
 	if (filename[i++] != 'b')
 		return (1);
@@ -112,7 +112,7 @@ void	print_map(char **map)
 
 void	map_valid_path(char **map, int curr_x, int curr_y, int *found)
 {
-	if (curr_x < 0 || curr_y < 0 || !map || !map[curr_y] || !map[curr_y][curr_x])
+	if (*found || curr_x < 0 || curr_y < 0 || !map || !map[curr_y] || !map[curr_y][curr_x])
 		return ;
 	if (map[curr_y][curr_x] == CHECK_FF || map[curr_y][curr_x] == WALL)
 		return ;

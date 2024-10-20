@@ -19,15 +19,13 @@ all: $(NAME)
 
 minilibmake:
 	@echo "Compiling minilib..."
-	@make -sC $(MLXDIR)
-	@echo "Done"
+	@make -C $(MLXDIR)
 
 $(MLIB): minilibmake
 
 $(NAME): $(OBJS) $(MLIB)
-	@echo "\nCompiling so_long"
+	@echo "Compiling so_long"
 	@$(CC) -L$(MLXDIR) -lmlx -framework OpenGL -framework AppKit $(OBJS) -o $(NAME) $(MLIB)
-	@echo "Done"
 
 ${ODIR}/%.o: %.c
 	@mkdir -p $(ODIR)
@@ -41,6 +39,7 @@ clean:
 
 fclean: clean
 	@echo "Deleting executable"
+	@make -C $(MLXDIR) clean
 	@rm -f $(NAME)
 
 re: fclean all 

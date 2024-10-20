@@ -13,7 +13,7 @@ int	create_image(t_prog *prog)
 		j = 0;
 		while (map[i][j])
 		{
-
+			
 		}
 	}
 }
