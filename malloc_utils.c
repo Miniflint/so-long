@@ -1,5 +1,14 @@
 #include "so_long.h"
 
+t_prog	*__get_prog(t_prog *prog)
+{
+	static t_prog	*static_prog;
+
+	if (prog)
+		static_prog = prog;
+	return (static_prog);
+}
+
 char	*ft_strdup(char *str)
 {
 	int		i;
@@ -49,7 +58,7 @@ int	get_len_backslash(char *str)
 		return (nb);
 	while (*str)
 	{
-		if (*str == '\n' && *(str + 1) && *(str + 1) =='\n')
+		if (*str == '\n' && *(str + 1) && *(str + 1) == '\n')
 			return (0);
 		if (*str == '\n')
 			nb++;
@@ -60,7 +69,7 @@ int	get_len_backslash(char *str)
 
 char	**fast_split(char *str)
 {
-	int	i;
+	int		i;
 	char	**ret;
 
 	i = get_len_backslash(str);

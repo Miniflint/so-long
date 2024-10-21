@@ -9,6 +9,8 @@ static void	__init_zero(t_prog *prog)
 	prog->size_y = 0;
 	prog->mlx.ptr = 0;
 	prog->mlx.win = 0;
+	prog->mlx.win_width = 0;
+	prog->mlx.win_height = 0;
 	prog->img.img = 0;
 	prog->img.addr = 0;
 	prog->img.bits_per_pixel = 0;
@@ -19,6 +21,9 @@ static void	__init_zero(t_prog *prog)
 	prog->txtr.item = 0;
 	prog->txtr.empty = 0;
 	prog->txtr.player = 0;
+	prog->player.x = 0;
+	prog->player.y = 0;
+	prog->player.nb_moves = 0;
 }
 
 static int	__init_textures(t_txtr *txtr)
@@ -26,16 +31,16 @@ static int	__init_textures(t_txtr *txtr)
 	txtr->fill = ft_strdup("./assets/wall_model.xpm");
 	if (!txtr->fill)
 		return (handle_things(3));
-	txtr->exit = ft_strdup("./assets/openExit_model.xmp");
+	txtr->exit = ft_strdup("./assets/openExit_model.xpm");
 	if (!txtr->exit)
 		return (handle_things(3));
 	txtr->item = ft_strdup("./assets/coin_model.xpm");
 	if (!txtr->item)
 		return (handle_things(3));
-	txtr->empty = ft_strdup("./assets/bg_model.xmp");
+	txtr->empty = ft_strdup("./assets/bg_model.xpm");
 	if (!txtr->empty)
 		return (handle_things(3));
-	txtr->player = ft_strdup("./assets/player_model.xmp");
+	txtr->player = ft_strdup("./assets/player_model.xpm");
 	if (!txtr->player)
 		return (handle_things(3));
 	return (0);
@@ -46,7 +51,7 @@ static int	__init_mlx(t_mlx *mlx)
 	mlx->ptr = mlx_init();
 	if (!mlx->ptr)
 		return (handle_things(5));
-	mlx->win = mlx_new_window(mlx->ptr, WIDTH, HEIGHT, WIN_NAME);
+	mlx->win = mlx_new_window(mlx->ptr, mlx->win_width, mlx->win_height, WIN_NAME);
 	if (!mlx->win)
 		return (handle_things(6));
 	return (0);
@@ -74,12 +79,14 @@ static int	check_map_valid(t_prog *prog)
 	map_valid_path(cpy, prog->player.x, prog->player.y, &found);
 	if (!found)
 		return (handle_ws("Could not find a valid path"));
+	free_2d_array(cpy);
 	return (0);
 }
 
 int	__init_struct(t_prog *prog, char *file)
 {
 	__init_zero(prog);
+	prog = __get_prog(prog);
 	if (get_ext_name(file))
 		return (handle_things(1));
 	prog->fd = open(file, O_RDONLY);
@@ -93,6 +100,8 @@ int	__init_struct(t_prog *prog, char *file)
 		return (1);
 	if (__init_textures(&(prog->txtr)))
 		return (1);
+	prog->mlx.win_width = prog->size_x * 64;
+	prog->mlx.win_height = prog->size_y * 64;
 	if (__init_mlx(&(prog->mlx)))
 		return (1);
 	return (0);

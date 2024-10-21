@@ -24,12 +24,15 @@ typedef struct s_player
 {
 	int	x;
 	int	y;
+	int	nb_moves;
 }	t_play;
 
 typedef struct	s_mlx
 {
 	void	*ptr;
 	void	*win;
+	int		win_width;
+	int		win_height;
 }	t_mlx;
 
 typedef struct	s_texture
@@ -53,5 +56,30 @@ typedef struct	s_prog
 	t_data	img;
 	t_play	player;
 }	t_prog;
+
+enum
+{
+	ON_KEYDOWN = 2,
+	ON_KEYUP = 3,
+	ON_MOUSEDOWN = 4,
+	ON_MOUSEUP = 5,
+	ON_MOUSEMOVE = 6,
+	ON_EXPOSE = 12,
+	ON_DESTROY = 17
+};
+
+enum
+{
+	K_W = 13,
+	K_A = 0,
+	K_S = 1,
+	K_D = 2,
+	K_UP = 126,
+	K_DOWN = 125,
+	K_R = 124,
+	K_L = 123,
+	K_ESC = 53,
+	K_Q = 12
+};
 
 #endif

@@ -2,7 +2,7 @@ ODIR	= ./obj
 MLXDIR	= minilib
 
 HSRC	= headers
-MSRCS	= main.c utils.c handle_error.c __init_struct.c malloc_utils.c read_utils.c map_valid.c
+MSRCS	= main.c utils.c handle_error.c __init_struct.c malloc_utils.c read_utils.c map_valid.c window_handle.c keys.c
 
 FILES	= $(MSRCS)
 OBJS	= $(FILES:%.c=${ODIR}/%.o)

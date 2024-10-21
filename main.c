@@ -1,6 +1,6 @@
 #include "so_long.h"
 
-static int	free_all(t_prog *prog)
+int	free_all(t_prog *prog)
 {
 	if (prog->read)
 		free(prog->read);
@@ -27,8 +27,7 @@ int main(int argc, char **argv)
 		return (handle_nea(argv[0]));
 	if (__init_struct(&prog, argv[1]))
 		return (free_all(&prog));
-//	while (1)
-//		mlx_loop(prog.mlx.ptr);
+	win_handle(&prog);
 	free_all(&prog);
 	return (0);
 }

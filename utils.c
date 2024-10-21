@@ -38,6 +38,16 @@ void	get_player_pos(t_prog *prog)
 	}
 }
 
+void	free_2d_array(char **map)
+{
+	int	i;
+
+	i = 0;
+	while (map[i])
+		free(map[i++]);
+	free(map);
+}
+
 char	**cpy_map(char **map, int size_y)
 {
 	int		i;

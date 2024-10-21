@@ -34,14 +34,12 @@ int	map_valid_pei(char *map)
 	{
 		if (*map == ITEM)
 			item++;
-		else if (*map == PLAYER && player > 0)
-			return (handle_ws("Too many players. 1 max allowed"));
 		else if (*map == PLAYER)
 			player++;
 		else if (*map == EXIT)
 			exit++;
-		else if (*map != WALL && *map != EMPTY && *map != '\n')
-			return (handle_ws("Unknown char"));
+		else if (validate_ifs(*map, player, exit))
+			return (1);
 		map++;
 	}
 	if (!item || !player || !exit)

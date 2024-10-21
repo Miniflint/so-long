@@ -25,7 +25,7 @@ int	handle_things(int code)
 	if (code == 2)
 		ft_putstr("Could not open the file\n");
 	if (code == 3)
-		ft_putstr("Malloc error somehow\n");
+		ft_putstr("Malloc error | empty map\n");
 	if (code == 4)
 		ft_putstr("Parsing not possible\n");
 	if (code == 5)
