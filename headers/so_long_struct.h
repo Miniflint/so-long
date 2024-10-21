@@ -22,9 +22,9 @@ typedef struct	s_data {
 
 typedef struct s_player
 {
-	int	x;
-	int	y;
-	int	nb_moves;
+	int				x;
+	int				y;
+	unsigned int	nb_moves;
 }	t_play;
 
 typedef struct	s_mlx

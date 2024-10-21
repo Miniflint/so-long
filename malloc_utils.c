@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   malloc_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: trgoel <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/21 22:35:05 by trgoel            #+#    #+#             */
+/*   Updated: 2024/10/21 22:35:53 by trgoel           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 t_prog	*__get_prog(t_prog *prog)
@@ -33,7 +45,8 @@ char	*ft_strjoin(char *s1, char *s2)
 	int		j;
 	char	*new_str;
 
-	new_str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	new_str = (char *)malloc(sizeof(char)
+			* (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!new_str)
 		return (NULL);
 	i = 0;

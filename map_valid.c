@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_valid.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: trgoel <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/21 22:35:57 by trgoel            #+#    #+#             */
+/*   Updated: 2024/10/21 22:37:31 by trgoel           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 int	get_ext_name(char *filename)
@@ -10,7 +22,7 @@ int	get_ext_name(char *filename)
 	if (i <= 4)
 		return (1);
 	i -= 4;
-if (filename[i++] != '.')
+	if (filename[i++] != '.')
 		return (1);
 	if (filename[i++] != 'b')
 		return (1);
@@ -43,7 +55,7 @@ int	map_valid_pei(char *map)
 		map++;
 	}
 	if (!item || !player || !exit)
-			return (handle_ws("Missing player || item || exit"));
+		return (handle_ws("Missing player || item || exit"));
 	return (0);
 }
 
@@ -72,7 +84,7 @@ int	map_valid_walls_rect(char **map, int m_x, int m_y)
 	return (0);
 }
 
-int map_valid_height_width(t_prog *prog)
+int	map_valid_height_width(t_prog *prog)
 {
 	int	i;
 	int	size_x;
@@ -94,23 +106,10 @@ int map_valid_height_width(t_prog *prog)
 	return (0);
 }
 
-void	print_map(char **map)
-{
-	int	i;
-
-	i = 0;
-	while (map[i])
-	{
-		ft_putstr(map[i]);
-		ft_putstr("\n");
-		i++;
-	}
-	ft_putstr("\n");
-}
-
 void	map_valid_path(char **map, int curr_x, int curr_y, int *found)
 {
-	if (*found || curr_x < 0 || curr_y < 0 || !map || !map[curr_y] || !map[curr_y][curr_x])
+	if (*found || curr_x < 0 || curr_y < 0
+		|| !map || !map[curr_y] || !map[curr_y][curr_x])
 		return ;
 	if (map[curr_y][curr_x] == CHECK_FF || map[curr_y][curr_x] == WALL)
 		return ;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   __init_struct.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: trgoel <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/21 22:29:21 by trgoel            #+#    #+#             */
+/*   Updated: 2024/10/21 22:29:54 by trgoel           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 static void	__init_zero(t_prog *prog)
@@ -51,7 +63,8 @@ static int	__init_mlx(t_mlx *mlx)
 	mlx->ptr = mlx_init();
 	if (!mlx->ptr)
 		return (handle_things(5));
-	mlx->win = mlx_new_window(mlx->ptr, mlx->win_width, mlx->win_height, WIN_NAME);
+	mlx->win = mlx_new_window(mlx->ptr, mlx->win_width,
+			mlx->win_height, WIN_NAME);
 	if (!mlx->win)
 		return (handle_things(6));
 	return (0);

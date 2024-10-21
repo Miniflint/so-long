@@ -27,6 +27,7 @@ void	get_player_pos(t_prog *prog);
 
 char	**cpy_map(char **map, int size_y);
 void	free_2d_array(char **map);
+void	ft_putnbr(unsigned int u);
 
 t_prog	*__get_prog(t_prog *prog);
 
