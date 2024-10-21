@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: trgoel <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/21 22:41:00 by trgoel            #+#    #+#             */
+/*   Updated: 2024/10/21 22:42:57 by trgoel           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
@@ -31,7 +43,6 @@ void	ft_putnbr(unsigned int u);
 
 t_prog	*__get_prog(t_prog *prog);
 
-
 // malloc utils
 char	*ft_strdup(char *str);
 char	**fast_split(char *str);
@@ -48,7 +59,7 @@ int		handle_things(int code);
 // check map valid
 int		map_valid_pei(char *map);
 int		get_ext_name(char *filename);
-int 	map_valid_height_width(t_prog *prog);
+int		map_valid_height_width(t_prog *prog);
 int		validate_ifs(char map, int player, int exit);
 int		map_valid_walls_rect(char **map, int m_x, int m_y);
 void	map_valid_path(char **map, int curr_x, int curr_y, int *found);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long_struct.h                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: trgoel <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/21 22:42:49 by trgoel            #+#    #+#             */
+/*   Updated: 2024/10/21 22:42:58 by trgoel           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SO_LONG_STRUCT_H
 # define SO_LONG_STRUCT_H
 
@@ -12,7 +24,8 @@
 # define EMPTY '0'
 # define CHECK_FF 'F'
 
-typedef struct	s_data {
+typedef struct s_data
+{
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
@@ -27,7 +40,7 @@ typedef struct s_player
 	unsigned int	nb_moves;
 }	t_play;
 
-typedef struct	s_mlx
+typedef struct s_mlx
 {
 	void	*ptr;
 	void	*win;
@@ -35,7 +48,7 @@ typedef struct	s_mlx
 	int		win_height;
 }	t_mlx;
 
-typedef struct	s_texture
+typedef struct s_texture
 {
 	char	*empty;
 	char	*fill;
@@ -44,7 +57,7 @@ typedef struct	s_texture
 	char	*item;
 }	t_txtr;
 
-typedef struct	s_prog
+typedef struct s_prog
 {
 	int		fd;
 	char	*read;
