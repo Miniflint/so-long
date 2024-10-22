@@ -6,7 +6,7 @@
 /*   By: trgoel <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 22:27:03 by trgoel            #+#    #+#             */
-/*   Updated: 2024/10/22 17:53:21 by trgoel           ###   ########.fr       */
+/*   Updated: 2024/10/22 17:56:27 by trgoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	check_can_move(char **map, int desired_x, int desired_y)
 	{
 		free(__get_prog(NULL)->txtr.exit);
 		__get_prog(NULL)->txtr.exit
-			= ft_strdup("./assets/openExit_model.xpm");
+		= ft_strdup("./assets/openExit_model.xpm");
 	}
 	return (0);
 }
