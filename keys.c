@@ -6,7 +6,7 @@
 /*   By: trgoel <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 22:27:03 by trgoel            #+#    #+#             */
-/*   Updated: 2024/10/21 22:30:23 by trgoel           ###   ########.fr       */
+/*   Updated: 2024/10/22 17:53:21 by trgoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,16 @@ int	check_can_move(char **map, int desired_x, int desired_y)
 		return (1);
 	if (map[desired_y][desired_x] == WALL)
 		return (1);
+	if (map[desired_y][desired_x] == EXIT
+		&& __get_prog(NULL)->player.nb_items != 0)
+		return (1);
+	if (map[desired_y][desired_x] == ITEM
+		&& __get_prog(NULL)->player.nb_items == 1)
+	{
+		free(__get_prog(NULL)->txtr.exit);
+		__get_prog(NULL)->txtr.exit
+			= ft_strdup("./assets/openExit_model.xpm");
+	}
 	return (0);
 }
 
@@ -28,12 +38,18 @@ int	make_move(char **map, t_play *play, int desired_x, int desired_y)
 	t_prog		*prog;
 
 	prog = __get_prog(NULL);
+	if (map[desired_y][desired_x] == ITEM)
+	{
+		create_texture(&(prog->mlx), prog->txtr.exit,
+			prog->exit_x * 64, prog->exit_y * 64);
+		play->nb_items -= 1;
+	}
 	if (map[desired_y][desired_x] == EXIT)
 		return (2);
-	map[desired_y][desired_x] = 'P';
+	map[desired_y][desired_x] = PLAYER;
 	play->x = desired_x;
 	play->y = desired_y;
-	map[old_y][old_x] = '0';
+	map[old_y][old_x] = EMPTY;
 	play->nb_moves += 1;
 	create_texture(&(prog->mlx), prog->txtr.player,
 		desired_x * 64, desired_y * 64);

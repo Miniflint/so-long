@@ -6,7 +6,7 @@
 /*   By: trgoel <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 22:35:57 by trgoel            #+#    #+#             */
-/*   Updated: 2024/10/21 22:37:31 by trgoel           ###   ########.fr       */
+/*   Updated: 2024/10/22 17:56:03 by trgoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	map_valid_pei(char *map)
 	}
 	if (!item || !player || !exit)
 		return (handle_ws("Missing player || item || exit"));
+	__get_prog(NULL)->player.nb_items = item;
 	return (0);
 }
 
@@ -114,9 +115,12 @@ void	map_valid_path(char **map, int curr_x, int curr_y, int *found)
 	if (map[curr_y][curr_x] == CHECK_FF || map[curr_y][curr_x] == WALL)
 		return ;
 	if (map[curr_y][curr_x] == EXIT)
+	{
+		__get_prog(NULL)->exit_y = curr_y;
+		__get_prog(NULL)->exit_x = curr_x;
 		*found = 1;
-	if (*found)
 		return ;
+	}
 	map[curr_y][curr_x] = CHECK_FF;
 	if (map[curr_y][curr_x + 1])
 		map_valid_path(map, curr_x + 1, curr_y, found);

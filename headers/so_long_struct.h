@@ -6,7 +6,7 @@
 /*   By: trgoel <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 22:42:49 by trgoel            #+#    #+#             */
-/*   Updated: 2024/10/21 22:42:58 by trgoel           ###   ########.fr       */
+/*   Updated: 2024/10/22 17:56:04 by trgoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_player
 	int				x;
 	int				y;
 	unsigned int	nb_moves;
+	unsigned int	nb_items;
 }	t_play;
 
 typedef struct s_mlx
@@ -64,6 +65,8 @@ typedef struct s_prog
 	char	**map;
 	int		size_x;
 	int		size_y;
+	int		exit_x;
+	int		exit_y;
 	t_mlx	mlx;
 	t_txtr	txtr;
 	t_data	img;

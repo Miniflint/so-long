@@ -6,7 +6,7 @@
 /*   By: trgoel <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 22:29:21 by trgoel            #+#    #+#             */
-/*   Updated: 2024/10/21 22:29:54 by trgoel           ###   ########.fr       */
+/*   Updated: 2024/10/22 17:42:42 by trgoel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static void	__init_zero(t_prog *prog)
 	prog->map = 0;
 	prog->size_x = 0;
 	prog->size_y = 0;
+	prog->exit_x = 0;
+	prog->exit_y = 0;
 	prog->mlx.ptr = 0;
 	prog->mlx.win = 0;
 	prog->mlx.win_width = 0;
@@ -36,6 +38,7 @@ static void	__init_zero(t_prog *prog)
 	prog->player.x = 0;
 	prog->player.y = 0;
 	prog->player.nb_moves = 0;
+	prog->player.nb_items = 0;
 }
 
 static int	__init_textures(t_txtr *txtr)
@@ -43,7 +46,7 @@ static int	__init_textures(t_txtr *txtr)
 	txtr->fill = ft_strdup("./assets/wall_model.xpm");
 	if (!txtr->fill)
 		return (handle_things(3));
-	txtr->exit = ft_strdup("./assets/openExit_model.xpm");
+	txtr->exit = ft_strdup("./assets/closeExit_model.xpm");
 	if (!txtr->exit)
 		return (handle_things(3));
 	txtr->item = ft_strdup("./assets/coin_model.xpm");
